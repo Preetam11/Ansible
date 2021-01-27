@@ -54,3 +54,20 @@
        service:
             name: httpd
             state: started 
+
+- name: PHP Install
+  hosts: web
+  become: yes
+  tasks:
+     - name: PHP Install
+       package:
+           name: php
+           state: latest
+     - name: Copy index
+       copy:
+          src: /home/centos/php/index.php
+          dest: /var/www/html/index.php
+     - name: Restart Service
+       service:
+            name: httpd
+            state: restarted

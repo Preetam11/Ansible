@@ -1,0 +1,56 @@
+---
+- name: Java Install
+  hosts: web
+  become: yes
+  tasks:
+     - name: Java Install
+       package:
+           name: java
+           state: latest
+
+
+#- name: Download Apache
+#  hosts: web
+#  become: yes
+#  tasks:
+#     - name: Download Apache
+#       get_url:
+#            url: "https://downloads.apache.org//httpd/httpd-2.4.46.tar.gz"
+#            dest: /home/centos
+#
+#- name: Unzip Install
+#  hosts: web
+#  become: yes
+#  tasks:
+#     - name: Unzip Install
+#       package:
+#           name: unzip
+#           state: present
+#
+#
+#- name: Unarchive a file that is already on the remote machine
+#  hosts: web
+#  become: yes
+#  tasks:
+#    - name: Make Dir
+#      file:
+#         path: /home/centos/apache-webserver/
+#         state: directory  
+#    - name: Extract
+#      unarchive:
+#           src: /home/centos/httpd-2.4.46.tar.gz
+#           dest: /home/centos/apache-webserver/
+#           remote_src: yes
+#
+- name: Apache Install
+  hosts: web
+  become: yes
+  tasks:
+     - name: Apache Install
+       package:
+           name: httpd 
+           state: latest
+     - name: Start Service
+       service:
+            name: httpd
+            state: started 
